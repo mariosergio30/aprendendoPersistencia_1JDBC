@@ -1,0 +1,41 @@
+CREATE TABLE ALUNO (
+matricula CHAR(8) NOT NULL PRIMARY KEY,
+nome Varchar(200) NOT NULL,
+cpf CHAR(14) UNIQUE NOT NULL,
+idade INT,
+sexo CHAR(1),
+pne CHAR(1) default 'N',
+escolaridade VARCHAR(15)
+);
+
+
+CREATE TABLE DISCIPLINA (
+id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+titulo Varchar(50) NOT NULL,
+area Varchar(40) NOT NULL
+);
+
+CREATE TABLE PROFESSOR (
+cpf CHAR(14) NOT NULL PRIMARY KEY,
+nome Varchar(200) NOT NULL,
+idade INT,
+SEXO CHAR(1),
+tempo_ensino INT,
+salario DECIMAL(9,2),
+disciplina_id INT NOT NULL,
+FOREIGN KEY(disciplina_id) REFERENCES DISCIPLINA (id)
+);
+
+
+CREATE TABLE AULA (
+id int AUTO_INCREMENT PRIMARY KEY,
+professor_cpf CHAR(14),
+aluno_matricula CHAR(8),
+data Date,
+media DECIMAL(4,2),
+duracao DECIMAL(3,1),
+valor DECIMAL(9,2),
+resultado VARCHAR(15),
+FOREIGN KEY(professor_cpf) REFERENCES PROFESSOR (cpf),
+FOREIGN KEY(aluno_matricula) REFERENCES ALUNO (matricula)
+);
